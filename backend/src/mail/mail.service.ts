@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import * as nodemailer from 'nodemailer';
+import * as fs from 'fs';
+import * as path from 'path';
+import * as ejs from 'ejs';
 import ical, { ICalEventData } from 'ical-generator';
 
 @Injectable()
@@ -19,12 +22,16 @@ export class MailService {
     });
   }
 
-  async sendMail(to: string, subject: string, text: string, icsContent: string) {
+  async sendMail(to: string, subject: string, templateName: string, templateData: any, icsContent: string) {
+    const templatePath = path.join(__dirname, 'templates', `${templateName}.ejs`);
+    const template = fs.readFileSync(templatePath, 'utf8');
+    const html = ejs.render(template, { ...templateData, startTime: templateData.startTime, endTime: templateData.endTime });
+
     const mailOptions = {
       from: this.serviceEmail, // Sender address
       to: to, // List of recipients
       subject: subject, // Subject line
-      text: text, // Plain text body
+      html: html, // HTML body
       icalEvent: {
         method: 'REQUEST',
         content: icsContent,

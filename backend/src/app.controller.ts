@@ -1,6 +1,7 @@
+
 import { Controller, Get, Post, Patch, Body, Param, Headers } from '@nestjs/common';
 import { AppService } from './app.service';
-import { Reason } from './availability.entity';
+import { Reason } from './availability/availability.entity';
 
 @Controller()
 export class AppController {

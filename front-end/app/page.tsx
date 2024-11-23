@@ -16,14 +16,17 @@ export default function Home() {
 
   return (
     <div className="container">
-      <h1 className="title">Welcome to Paladin</h1>
-      <div className="button-container">
-        <button className="button" onClick={goToDoctorView}>
-          Doctor's View
-        </button>
-        <button className="button" onClick={goToPatientView}>
-          Patient's View
-        </button>
+      <h1 className="title">Bienvenue sur votre espace Paladin 👋</h1>
+      <div className="subtitle-container">
+        <h2 className="subtitle large">vous êtes: </h2>
+        <div className="button-container">
+          <button className="button" onClick={goToDoctorView}>
+            Soignant
+          </button>
+          <button className="button" onClick={goToPatientView}>
+            Patient
+          </button>
+        </div>
       </div>
     </div>
   );

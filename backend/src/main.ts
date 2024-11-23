@@ -7,7 +7,7 @@ async function bootstrap() {
 
   // Enable CORS with specific origins
   app.enableCors({
-    origin: ['http://localhost:3000', 'http://example.com'], // Add your allowed origins here
+    origin: ['http://localhost:3000', 'http://example.com', 'https://hugo.ngrok.io'], // Add your allowed origins here
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
   });

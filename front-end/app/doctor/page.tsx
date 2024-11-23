@@ -41,20 +41,20 @@ export default function Doctor() {
 
   return (
     <div className="container">
-      <button className="back-button" onClick={() => router.push("/")}>Back to Landing</button>
-      <h1 className="title">Doctor's View</h1>
+      <button className="back-button" onClick={() => router.push("/")}>Retour à l'accueil</button>
+      <h1 className="title">Vue du médecin</h1>
       <button className="add-button" onClick={() => router.push("/doctor/add-availability")}>+</button>
-      {loading && <div>Loading...</div>}
-      {error && <div>Error: {error}</div>}
+      {loading && <div>Chargement...</div>}
+      {error && <div>Erreur : {error}</div>}
       <table className="table">
         <thead>
           <tr>
             <th>Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Booked</th>
-            <th>Reason</th>
-            <th>Comment</th>
+            <th>Heure de début</th>
+            <th>Heure de fin</th>
+            <th>Réservé</th>
+            <th>Raison</th>
+            <th>Commentaire</th>
           </tr>
         </thead>
         <tbody>
@@ -64,7 +64,7 @@ export default function Doctor() {
               <td>{slot.startTime}</td>
               <td>{slot.endTime}</td>
               <td className={slot.booked ? 'booked' : 'available'}>
-                {slot.booked ? "Yes" : "No"}
+                {slot.booked ? "Oui" : "Non"}
               </td>
               <td>{reasonMapping[slot.reason] || "--"}</td>
               <td>{slot.comment || "--"}</td>

@@ -13,3 +13,16 @@ Have a page detailing upcomming appointements for the client
 Reminder service 
 pagination
 hide past events 
+
+
+Usage
+
+
+cd front-end
+npm run dev
+cd ../backend
+npm run start:dev
+
+ngrok http http://localhost:3000 --region=eu --url=hugo.ngrok.io 
+
+

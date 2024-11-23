@@ -1,0 +1,8 @@
+Bonjour {{name}},
+
+Un nouveau rendez-vous a été réservé pour le {{date | date('dd/MM/yyyy')}} à {{time | date('HH:mm')}}. Raison : {{reason}}. Commentaire : {{comment}}.
+
+Rejoignez la réunion : {{link}}
+
+Merci,
+L'équipe Paladin

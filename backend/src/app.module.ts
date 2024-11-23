@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
+
 import { AppService } from './app.service';
-import { Availability } from './availability.entity';
-import { MailService } from './mail.service';
-import appConfig from './config';
+import { Availability } from './availability/availability.entity';
+import { MailService } from './mail/mail.service';
+import appConfig from './config/config';
 
 @Module({
   imports: [

@@ -51,16 +51,16 @@ export default function Patient() {
 
   return (
     <div className="container">
-      <button className="back-button" onClick={() => router.push("/")}>Back to Landing</button>
-      <h1 className="title">Available Availabilities</h1>
-      {loading && <div>Loading...</div>}
-      {error && <div>Error: {error}</div>}
+      <button className="back-button" onClick={() => router.push("/")}>Retour à l'accueil</button>
+      <h1 className="title">Disponibilités</h1>
+      {loading && <div>Chargement...</div>}
+      {error && <div>Erreur : {error}</div>}
       <table className="table">
         <thead>
           <tr>
             <th>Date</th>
-            <th>Start Time</th>
-            <th>End Time</th>
+            <th>Heure de début</th>
+            <th>Heure de fin</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -71,7 +71,7 @@ export default function Patient() {
               <td>{slot.startTime}</td>
               <td>{slot.endTime}</td>
               <td>
-                <button className="button" onClick={() => handleClick(slot)}>Book</button>
+                <button className="button" onClick={() => handleClick(slot)}>Réserver</button>
               </td>
             </tr>
           ))}

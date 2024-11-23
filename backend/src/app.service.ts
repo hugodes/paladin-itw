@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Availability, Reason } from './availability.entity';
-import { MailService } from './mail.service';
+import { Availability, Reason } from './availability/availability.entity';
+import { MailService } from './mail/mail.service';
 import { ConfigService } from '@nestjs/config';
 
 @Injectable()
@@ -67,7 +67,16 @@ export class AppService {
     await this.mailService.sendMail(
       this.patientEmail,
       'Booking Confirmation',
-      `Your appointment is booked for ${availability.date} from ${availability.startTime} to ${availability.endTime}. Reason: ${reason}. Comment: ${comment || 'N/A'}. Join the meeting: ${googleMeetLink}`,
+      'booking-confirmation',
+      {
+        name: 'Patient',
+        date: availability.date,
+        startTime: availability.startTime,
+        endTime: availability.endTime,
+        reason: reason,
+        comment: comment || 'N/A',
+        link: googleMeetLink,
+      },
       icsContent,
     );
 
@@ -75,7 +84,16 @@ export class AppService {
     await this.mailService.sendMail(
       this.doctorEmail,
       'New Booking Notification',
-      `A new appointment has been booked for ${availability.date} from ${availability.startTime} to ${availability.endTime}. Reason: ${reason}. Comment: ${comment || 'N/A'}. Join the meeting: ${googleMeetLink}`,
+      'new-booking-notification',
+      {
+        name: 'Doctor',
+        date: availability.date,
+        startTime: availability.startTime,
+        endTime: availability.endTime,
+        reason: reason,
+        comment: comment || 'N/A',
+        link: googleMeetLink,
+      },
       icsContent,
     );
 
