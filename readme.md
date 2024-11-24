@@ -1,6 +1,6 @@
 # Paladin
 
-## Limits
+## Limits & Improvements
 
 - Use existing tools for appointment booking, conferencing, etc.
 - Have multiple doctors
@@ -14,11 +14,12 @@
 - Pagination
 - Hide past events
 - Customize emails with user names
-- Vue en caldendirer
-- Pouvoir synchrnoiser son calendrier
-- En tant que medecin pouvoir définir une plage de dispo (9h-13h) et créer des dispos de 15min sur cette plage.
-- Ecrire des tests 
-- Integration dans les SIRH
+- Calendar view
+- Allow to sync your calendar
+- As a doctor add availabilities via batch (time range)
+- Write tests
+- Entrage SIRH
+- Allow multiple envs (only works with ngrok today)
 
 ## Usage
 
