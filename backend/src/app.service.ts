@@ -83,7 +83,7 @@ export class AppService {
     availability.comment = comment || null;
     const savedAvailability = await this.availabilityRepository.save(availability);
 
-    const googleMeetLink = 'https://meet.google.com/your-meeting-id'; // Replace with actual Google Meet link
+    const googleMeetLink = 'https://meet.google.com/cnc-jaog-fwy'; // Replace with actual Google Meet link
     const icsContent = this.mailService.generateIcsFile(
       availability.date,
       availability.startTime,

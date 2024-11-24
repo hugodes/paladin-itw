@@ -10,20 +10,22 @@
 - Send emails before appointments
 - Have a cancel appointment button for both doctor and patient with notifications on either end
 - Have durations according to appointment type
-- Have a page detailing upcoming appointments for the client
+- Have a page detailing upcoming appointments for the client, see links for the meet
 - Pagination
 - Hide past events
 - Customize emails with user names
+- Vue en caldendirer
+- Pouvoir synchrnoiser son calendrier
+- En tant que medecin pouvoir définir une plage de dispo (9h-13h) et créer des dispos de 15min sur cette plage.
+- Ecrire des tests 
+- Integration dans les SIRH
 
 ## Usage
 
 ```bash
-cd front-end
-npm run dev
-cd ../backend
-npm run start:dev
+docker compose up --build
 
-ngrok http http://localhost:3000 --region=eu --url=hugo.ngrok.io
+ngrok http http://localhost:3002 --region=eu --url=hugo.ngrok.io
 ```
 
 

@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { reasonMapping } from "../lib/reasonMapping"; 
 
 const fetchAllAvailabilities = async () => {
-  const response = await fetch("http://localhost:3001/availabilities", {
+  const response = await fetch("https://hugo.ngrok.io/api/availabilities", {
     method: "GET",
     headers: {
       "Content-Type": "application/json",

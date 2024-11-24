@@ -18,7 +18,7 @@ export default function Home() {
     <div className="container">
       <h1 className="title">Bienvenue sur votre espace Paladin 👋</h1>
       <div className="subtitle-container">
-        <h2 className="subtitle large">vous êtes: </h2>
+        <h2 className="subtitle large">Vous êtes: </h2>
         <div className="button-container">
           <button className="button" onClick={goToDoctorView}>
             Médecin

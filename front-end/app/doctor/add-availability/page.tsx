@@ -23,7 +23,7 @@ export default function AddAvailability() {
     };
 
     try {
-      const response = await fetch("http://localhost:3001/availability", {
+      const response = await fetch("https://hugo.ngrok.io/api/availability", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -27,7 +27,7 @@ export default function Booking() {
     setLoading(true);
     setError(""); // Reset error message
     try {
-      const response = await fetch(`http://localhost:3001/availability/${id}/book`, {
+      const response = await fetch(`https://hugo.ngrok.io/api/availability/${id}/book`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
