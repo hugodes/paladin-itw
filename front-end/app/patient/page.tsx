@@ -51,8 +51,8 @@ export default function Patient() {
 
   return (
     <div className="container">
-      <button className="back-button" onClick={() => router.push("/")}>Retour à l'accueil</button>
-      <h1 className="title">Disponibilités</h1>
+      <button className="back-button" onClick={() => router.push("/")}>Retour à l'accueil 🏠</button>
+      <h1 className="title">Créneaux disponibles</h1>
       {loading && <div>Chargement...</div>}
       {error && <div>Erreur : {error}</div>}
       <table className="table">
@@ -71,7 +71,7 @@ export default function Patient() {
               <td>{slot.startTime}</td>
               <td>{slot.endTime}</td>
               <td>
-                <button className="button" onClick={() => handleClick(slot)}>Réserver</button>
+                <button className="button" onClick={() => handleClick(slot)}>Réserver pour employé.e</button>
               </td>
             </tr>
           ))}

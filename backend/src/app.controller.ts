@@ -1,5 +1,4 @@
-
-import { Controller, Get, Post, Patch, Body, Param, Headers } from '@nestjs/common';
+import { Controller, Get, Post, Patch, Body, Param, Headers, HttpException, HttpStatus } from '@nestjs/common';
 import { AppService } from './app.service';
 import { Reason } from './availability/availability.entity';
 
@@ -18,7 +17,14 @@ export class AppController {
     @Body('startTime') startTime: string,
     @Body('endTime') endTime: string,
   ) {
-    return this.appService.addAvailabilitySlot(new Date(date), startTime, endTime);
+    try {
+      return await this.appService.addAvailabilitySlot(new Date(date), startTime, endTime);
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 
   @Get('availabilities')
@@ -28,7 +34,7 @@ export class AppController {
     } else if (auth === 'patient') {
       return this.appService.getAvailableAvailabilities();
     } else {
-      throw new Error('Unauthorized');
+      throw new HttpException('Unauthorized', HttpStatus.UNAUTHORIZED);
     }
   }
 
@@ -38,6 +44,13 @@ export class AppController {
     @Body('reason') reason: Reason,
     @Body('comment') comment?: string,
   ) {
-    return this.appService.bookAvailabilitySlot(id, reason, comment);
+    try {
+      return await this.appService.bookAvailabilitySlot(id, reason, comment);
+    } catch (error) {
+      if (error instanceof HttpException) {
+        throw error;
+      }
+      throw new HttpException(error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
   }
 }

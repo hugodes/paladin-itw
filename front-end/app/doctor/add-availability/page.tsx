@@ -10,9 +10,11 @@ export default function AddAvailability() {
   const [startTimeMinute, setStartTimeMinute] = useState("00");
   const [endTimeHour, setEndTimeHour] = useState("00");
   const [endTimeMinute, setEndTimeMinute] = useState("00");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setError(""); // Reset error message
 
     const availability = {
       date,
@@ -30,29 +32,30 @@ export default function AddAvailability() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to add availability");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Failed to add availability");
       }
 
-      alert("Availability added successfully");
+      alert("Disponibilité ajoutée avec succès !");
       setDate("");
       setStartTimeHour("00");
       setStartTimeMinute("00");
       setEndTimeHour("00");
       setEndTimeMinute("00");
-      router.push("/doctor"); // Redirect back to the doctor page
+      router.push("/doctor"); // Redirect back to the médecin page
     } catch (error) {
-      console.error("Error adding availability:", error);
-      alert("Failed to add availability");
+      console.error("Erreur lors de l'ajout de la disponibilité :", error);
+      setError(error.message);
     }
   };
 
   return (
     <div className="container">
-      <button className="back-button" onClick={() => router.push("/doctor")}>Back to Doctor's View</button>
-      <h1 className="title">Add Availability</h1>
+      <button className="back-button" onClick={() => router.push("/doctor")}>Retour à la vue du médecin</button>
+      <h1 className="title">Ajouter une disponibilité</h1>
       <form onSubmit={handleSubmit} className="form">
         <div className="form-group">
-          <label htmlFor="date">Date:</label>
+          <label htmlFor="date">Date :</label>
           <input
             type="date"
             id="date"
@@ -63,7 +66,7 @@ export default function AddAvailability() {
           />
         </div>
         <div className="form-group">
-          <label>Start Time:</label>
+          <label>Heure de début :</label>
           <div className="time-select">
             <select
               id="startTimeHour"
@@ -95,7 +98,7 @@ export default function AddAvailability() {
           </div>
         </div>
         <div className="form-group">
-          <label>End Time:</label>
+          <label>Heure de fin :</label>
           <div className="time-select">
             <select
               id="endTimeHour"
@@ -126,7 +129,8 @@ export default function AddAvailability() {
             </select>
           </div>
         </div>
-        <button type="submit" className="button">Add Availability</button>
+        {error && <div className="error-message">{error}</div>}
+        <button type="submit" className="button">Ajouter la disponibilité</button>
       </form>
     </div>
   );

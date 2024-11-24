@@ -42,14 +42,14 @@
 <body>
   <div class="container">
     <h1 class="title">Confirmation de Réservation 📅</h1>
-    <p class="content">Bonjour <%= name %>,</p>
+    <p class="content">Bonjour <%= name %> 👋,</p>
     <ul class="content">
       <li>Date et heure : <%= new Date(date).toLocaleDateString('fr-FR', { day: '2-digit', month: '2-digit', year: 'numeric' }) %> de <%= startTime %> à <%= endTime %></li>
-      <li>Raison : <%= reason %></li>
+      <li>Raison : <%= reasonMapping[reason] %></li>
       <li>Commentaire : <%= comment %></li>
     </ul>
     <p class="content">Rejoignez la réunion : <a class="link" href="<%= link %>"><%= link %></a></p>
-    <p class="content">Merci,<br>L'équipe Paladin 🛡️</p>
+    <p class="content">Merci,<br>L'équipe Paladin</p>
   </div>
 </body>
 </html>

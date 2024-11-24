@@ -41,8 +41,8 @@ export default function Doctor() {
 
   return (
     <div className="container">
-      <button className="back-button" onClick={() => router.push("/")}>Retour à l'accueil</button>
-      <h1 className="title">Vue du médecin</h1>
+      <button className="back-button" onClick={() => router.push("/")}>Retour à l'accueil 🏠</button>
+      <h1 className="title">Mes disponibilités</h1>
       <button className="add-button" onClick={() => router.push("/doctor/add-availability")}>+</button>
       {loading && <div>Chargement...</div>}
       {error && <div>Erreur : {error}</div>}

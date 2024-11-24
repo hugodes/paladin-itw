@@ -21,10 +21,10 @@ export default function Home() {
         <h2 className="subtitle large">vous êtes: </h2>
         <div className="button-container">
           <button className="button" onClick={goToDoctorView}>
-            Soignant
+            Médecin
           </button>
           <button className="button" onClick={goToPatientView}>
-            Patient
+            Employé.e
           </button>
         </div>
       </div>

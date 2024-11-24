@@ -17,9 +17,15 @@ export default function Booking() {
   const [comment, setComment] = useState("");
   const [loading, setLoading] = useState(false);
   const [confirmationMessage, setConfirmationMessage] = useState("");
+  const [error, setError] = useState("");
 
   const handleConfirm = async () => {
+    if (!reason) {
+      setError("La raison est obligatoire");
+      return;
+    }
     setLoading(true);
+    setError(""); // Reset error message
     try {
       const response = await fetch(`http://localhost:3001/availability/${id}/book`, {
         method: "PATCH",
@@ -30,19 +36,19 @@ export default function Booking() {
       });
 
       if (!response.ok) {
-        throw new Error("Network response was not ok");
+        const errorData = await response.json();
+        throw new Error(errorData.message || "Network response was not ok");
       }
 
       const data = await response.json();
-      console.log(`Rendez-vous réservé pour le ${date} de ${startTime} à ${endTime}`);
       setConfirmationMessage("✅ Réservation confirmée avec succès!");
       setTimeout(() => {
         setConfirmationMessage("");
-        router.push("/patient"); // Redirect back to the patient page
+        router.push("/patient"); // Redirect back to the employé.e page
       }, 3000); // Hide the message after 3 seconds
     } catch (error) {
       console.error("Error booking appointment:", error);
-      console.log("Failed to book appointment");
+      setError(error.message || "Failed to book appointment");
     } finally {
       setLoading(false);
     }
@@ -58,18 +64,18 @@ export default function Booking() {
       {loading && (
         <div className="modal">
           <div className="modal-content">
-            <p>🛡️ Réservation...</p>
+            <p>Réservation... 📨</p>
           </div>
         </div>
       )}
-      <h1 className="title">Confirmer la réservation</h1>
+      <h1 className="title">Confirmer la réservation 📆</h1>
       <div className="booking-info">
         <p><strong>Date :</strong> {new Date(date).toLocaleDateString()}</p>
         <p><strong>Heure de début :</strong> {startTime}</p>
         <p><strong>Heure de fin :</strong> {endTime}</p>
       </div>
       <div className="form-group">
-        <label htmlFor="reason">Raison :</label>
+        <label htmlFor="reason">Raison <span className="required">*</span>:</label>
         <select
           id="reason"
           value={reason}
@@ -85,6 +91,7 @@ export default function Booking() {
           ))}
         </select>
       </div>
+      {error && <div className="error-message">{error}</div>}
       <div className="form-group">
         <label htmlFor="comment">Commentaire (facultatif) :</label>
         <textarea
@@ -96,7 +103,7 @@ export default function Booking() {
       </div>
       <div className="button-container">
         <button className="button" onClick={handleConfirm} disabled={loading}>
-          {loading ? "🛡️ Réservation..." : "Confirmer"}
+          {loading ? "Réservation..." : "Confirmer"}
         </button>
         <button className="button" onClick={() => router.push("/patient")} disabled={loading}>
           Annuler

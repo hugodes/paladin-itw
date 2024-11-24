@@ -5,6 +5,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ejs from 'ejs';
 import ical, { ICalEventData } from 'ical-generator';
+import { reasonMapping } from '../lib/reasonMapping';
 
 @Injectable()
 export class MailService {
@@ -22,26 +23,46 @@ export class MailService {
     });
   }
 
-  async sendMail(to: string, subject: string, templateName: string, templateData: any, icsContent: string) {
-    const templatePath = path.join(__dirname, 'templates', `${templateName}.ejs`);
+  async sendMail(
+    to: string,
+    subject: string,
+    templateName: string,
+    templateData: any,
+    icsContent: string,
+  ) {
+    const templatePath = path.join(
+      __dirname,
+      'templates',
+      `${templateName}.ejs`,
+    );
     const template = fs.readFileSync(templatePath, 'utf8');
-    const html = ejs.render(template, { ...templateData, startTime: templateData.startTime, endTime: templateData.endTime });
+    const html = ejs.render(template, { ...templateData, reasonMapping });
 
     const mailOptions = {
       from: this.serviceEmail, // Sender address
       to: to, // List of recipients
       subject: subject, // Subject line
       html: html, // HTML body
-      icalEvent: {
-        method: 'REQUEST',
-        content: icsContent,
-      },
+      alternatives: [
+        {
+          contentType: 'text/calendar',
+          content: icsContent,
+          method: 'REQUEST',
+        },
+      ],
     };
 
     return this.transporter.sendMail(mailOptions);
   }
 
-  generateIcsFile(date: Date, startTime: string, endTime: string, summary: string, description: string, location: string): string {
+  generateIcsFile(
+    date: Date,
+    startTime: string,
+    endTime: string,
+    summary: string,
+    description: string,
+    location: string,
+  ): string {
     const event: ICalEventData = {
       start: new Date(`${date.toISOString().split('T')[0]}T${startTime}:00`),
       end: new Date(`${date.toISOString().split('T')[0]}T${endTime}:00`),
