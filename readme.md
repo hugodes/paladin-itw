@@ -28,5 +28,9 @@ docker compose up --build
 ngrok http http://localhost:3002 --region=eu --url=hugo.ngrok.io
 ```
 
+## Before interview
+- Ask for emails
+- Add email password
+
 
 

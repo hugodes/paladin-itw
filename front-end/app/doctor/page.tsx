@@ -43,35 +43,37 @@ export default function Doctor() {
     <div className="container">
       <button className="back-button" onClick={() => router.push("/")}>Retour à l'accueil 🏠</button>
       <h1 className="title">Mes disponibilités</h1>
-      <button className="add-button" onClick={() => router.push("/doctor/add-availability")}>+</button>
       {loading && <div>Chargement...</div>}
       {error && <div>Erreur : {error}</div>}
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Heure de début</th>
-            <th>Heure de fin</th>
-            <th>Réservé</th>
-            <th>Raison</th>
-            <th>Commentaire</th>
-          </tr>
-        </thead>
-        <tbody>
-          {availabilities.map((slot, index) => (
-            <tr key={index} className="availability-item">
-              <td>{new Date(slot.date).toLocaleDateString()}</td>
-              <td>{slot.startTime}</td>
-              <td>{slot.endTime}</td>
-              <td className={slot.booked ? 'booked' : 'available'}>
-                {slot.booked ? "Oui" : "Non"}
-              </td>
-              <td>{reasonMapping[slot.reason] || "--"}</td>
-              <td>{slot.comment || "--"}</td>
+      <div className="table-container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Heure de début</th>
+              <th>Heure de fin</th>
+              <th>Réservé</th>
+              <th>Raison</th>
+              <th>Commentaire</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {availabilities.map((slot, index) => (
+              <tr key={index} className="availability-item">
+                <td>{new Date(slot.date).toLocaleDateString()}</td>
+                <td>{slot.startTime}</td>
+                <td>{slot.endTime}</td>
+                <td className={slot.booked ? 'booked' : 'available'}>
+                  {slot.booked ? "Oui" : "Non"}
+                </td>
+                <td>{reasonMapping[slot.reason] || "--"}</td>
+                <td>{slot.comment || "--"}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <button className="add-button" onClick={() => router.push("/doctor/add-availability")}>+</button>
+      </div>
     </div>
   );
 }
